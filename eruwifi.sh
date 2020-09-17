@@ -35,7 +35,7 @@ echo ""
 
 echo "$interface"                                                                echo
 airmon-ng start $interface > /dev/null
-mon= ifconfig -s | grep 'mon' | awk '{print $1}'
+mon=$(ifconfig -s | grep 'mon' | awk '{print $1}')
                                                                                  echo $mon
 }                                                                                
 function interfaces {
@@ -89,8 +89,9 @@ function conecction {
         echo 'iniciando configuracion de ap'
 	hostapd eruhostapd.conf > /dev/null
 	ifconfig $mon 10.0.0.1 netmask 255.255.255.0
-	dnsmasq -C erudhcp.conf -d > /dev/null
-        route add -net 10.0.0.1 netmask 255.255.255.0 gw 10.0.0.1
+	sleep 1
+        dnsmasq -C erudhcp.conf -d > /dev/null
+        route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 	iptables --table nat --append POSTROUTING --out-interface $red -j MASQUERADE
 	iptables --append FORWARD --in-interface $mon -j ACCEPT
         echo 1 > /proc/sys/net/ipv4/ip_forward
