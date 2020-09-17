@@ -85,7 +85,7 @@ function conecction {
 
         clear
 	banner
-        read -p "Interface a compartir red" red
+        read -p "Interface a compartir red: " red
         echo 'iniciando configuracion de ap'
 	hostapd eruhostapd.conf > /dev/null
 	ifconfig $mon 10.0.0.1 netmask 255.255.255.0
