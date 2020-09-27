@@ -12,7 +12,9 @@ function Ctrl_c(){
 	rm eruhostapd.conf
 	rm erudhcp.conf
 	airmon-ng stop $mon > /dev/null
-	sleep 2
+        sleep 2
+	service network-manager restart
+        sleep 2
 	exit
 
 
